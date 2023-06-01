@@ -1,48 +1,37 @@
+import All_books from "./src/pages/all_books";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import React from "react";
+import { colors } from "./src/globals/colors";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-	const [all_collections, set_all_collections] = useState([]);
-
-	async function fetch_collections() {
-		const response = await fetch("http://localhost:5000/v1/collections");
-		const response_json = await response.json();
-		set_all_collections(response_json);
-	}
-
-	useEffect(() => {
-		fetch_collections();
-	}, []);
-
-  try {
-    var all_collection_elements = all_collections["data"].map(function (one_collection) {
-      return (
-        <View>
-          <Text>{one_collection["name"]}</Text>
-        </View>
-      );
-    });
-  
-  } catch (error) {
-    var all_collection_elements = <View></View>
-  }
-
-  
+	console.log(colors);
 	return (
-		<View style={styles.container}>
-			{all_collection_elements}
-			<Text>sadsadad</Text>
+		<View style={styles.app_container}>
 			<StatusBar style="auto" />
+
+			<NavigationContainer style={styles.nav_container} theme={app_theme}>
+				<Stack.Navigator>
+					<Stack.Screen name="All Books" component={All_books} options={{ title: "All Books" }} />
+				</Stack.Navigator>
+			</NavigationContainer>
 		</View>
 	);
 }
-
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
+	app_container: {
+		width: "100%",
+		height: "100%",
+    backgroundColor: colors.background
 	},
 });
+
+const app_theme = {
+	colors: {
+		// background: colors.background,
+	},
+};
