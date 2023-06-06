@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import One_book from "./all_books/one_book";
 
-export default function All_books() {
+export default function All_books({navigation}) {
 	const [all_collections, set_all_collections] = useState([]);
 
 	useEffect(() => {
@@ -20,7 +20,8 @@ export default function All_books() {
 
 	try {
 		 all_collection_elements= all_collections["data"].map(function (one_collection) {
-			return <One_book>{one_collection["collection"][0]['title']}</One_book>;
+			console.log(one_collection)
+			return <One_book navigation={navigation} one_collection={one_collection}>{one_collection["collection"][0]['title']}</One_book>;
 		});
 	} catch (error) {
 		all_collection_elements = <View></View>

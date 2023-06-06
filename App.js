@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import { colors } from "./src/globals/colors";
+import All_hadiths from "./src/pages/all_hadiths";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
 			<NavigationContainer style={styles.nav_container} theme={app_theme}>
 				<Stack.Navigator>
 					<Stack.Screen name="All Books" component={All_books} options={{ title: "All Books" }} />
+					<Stack.Screen name="All Hadiths" component={All_hadiths} options={{ title: "All Hadiths" }} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</View>
